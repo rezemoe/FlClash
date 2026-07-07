@@ -333,7 +333,6 @@ class ExcludeInterfaceItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final appLocalizations = context.appLocalizations;
     final excludeInterface = ref.watch(
       patchClashConfigProvider.select((state) => state.tun.excludeInterface),
     );
@@ -365,7 +364,6 @@ class ExcludePackageItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final appLocalizations = context.appLocalizations;
     final excludePackage = ref.watch(
       patchClashConfigProvider.select((state) => state.tun.excludePackage),
     );
