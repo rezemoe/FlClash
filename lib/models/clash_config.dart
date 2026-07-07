@@ -212,6 +212,8 @@ abstract class Tun with _$Tun {
     @Default(TunStack.mixed) TunStack stack,
     @JsonKey(name: 'dns-hijack') @Default(['any:53']) List<String> dnsHijack,
     @JsonKey(name: 'route-address') @Default([]) List<String> routeAddress,
+    @JsonKey(name: 'exclude-package') @Default([]) List<String> excludePackage,
+    @JsonKey(name: 'exclude-interface') @Default([]) List<String> excludeInterface,
   }) = _Tun;
 
   factory Tun.fromJson(Map<String, Object?> json) => _$TunFromJson(json);

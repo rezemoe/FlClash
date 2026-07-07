@@ -328,6 +328,70 @@ class RouteAddressItem extends ConsumerWidget {
   }
 }
 
+class ExcludeInterfaceItem extends ConsumerWidget {
+  const ExcludeInterfaceItem({super.key});
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final appLocalizations = context.appLocalizations;
+    final excludeInterface = ref.watch(
+      patchClashConfigProvider.select((state) => state.tun.excludeInterface),
+    );
+    return ListItem.open(
+      title: const Text('Exclude Interface'),
+      subtitle: const Text('Exclude routing for specific interfaces'),
+      delegate: OpenDelegate(
+        blur: false,
+        maxWidth: 360,
+        widget: ListInputPage(
+          title: 'Exclude Interface',
+          items: excludeInterface,
+          titleBuilder: (item) => Text(item),
+        ),
+        onChanged: (items) {
+          ref
+              .read(patchClashConfigProvider.notifier)
+              .update(
+                (state) => state.copyWith.tun(excludeInterface: List.from(items)),
+              );
+        },
+      ),
+    );
+  }
+}
+
+class ExcludePackageItem extends ConsumerWidget {
+  const ExcludePackageItem({super.key});
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final appLocalizations = context.appLocalizations;
+    final excludePackage = ref.watch(
+      patchClashConfigProvider.select((state) => state.tun.excludePackage),
+    );
+    return ListItem.open(
+      title: const Text('Exclude Package'),
+      subtitle: const Text('Exclude routing for specific Android packages'),
+      delegate: OpenDelegate(
+        blur: false,
+        maxWidth: 360,
+        widget: ListInputPage(
+          title: 'Exclude Package',
+          items: excludePackage,
+          titleBuilder: (item) => Text(item),
+        ),
+        onChanged: (items) {
+          ref
+              .read(patchClashConfigProvider.notifier)
+              .update(
+                (state) => state.copyWith.tun(excludePackage: List.from(items)),
+              );
+        },
+      ),
+    );
+  }
+}
+
 class NetworkListView extends StatelessWidget {
   const NetworkListView({super.key});
 
@@ -362,6 +426,8 @@ class NetworkListView extends StatelessWidget {
             const RouteModeItem(),
             const RouteAddressItem(),
           ],
+          const ExcludeInterfaceItem(),
+          const ExcludePackageItem(),
         ],
       ),
     ]);
